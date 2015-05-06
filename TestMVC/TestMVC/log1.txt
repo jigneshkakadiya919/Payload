@@ -25,3 +25,8 @@
 [07-05-2015 00:25:50] reqest received
 [07-05-2015 00:25:55] reqest received
 [07-05-2015 00:29:09] reqest received
+[07-05-2015 00:44:18] reqest received
+[07-05-2015 00:45:01] cd c:\webs\test && git reset --hard HEAD && git pull
+[07-05-2015 00:45:01] begin deploy
+[07-05-2015 00:45:01] 
+[07-05-2015 00:45:01] end deploy
