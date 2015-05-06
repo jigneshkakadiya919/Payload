@@ -28,10 +28,11 @@ namespace TestMVC
             //    Deploy();
             //}
 
-            //if (req.QueryString["token"] == ConfigurationManager.AppSettings["token"])
-            //{
+            if (req.QueryString["token"] == ConfigurationManager.AppSettings["token"])
+            {
                 Deploy();
-            //}
+            }
+            Deploy();
             context.Response.ContentType = "text/plain";
             context.Response.Write("OK");
             Log.Dispose();
