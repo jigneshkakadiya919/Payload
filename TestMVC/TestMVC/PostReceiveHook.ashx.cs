@@ -21,7 +21,7 @@ namespace TestMVC
         //}
         public void ProcessRequest(HttpContext context)
         {
-            //Log = new Logger(context.Server.MapPath(""));
+            //Log = new Logger(context.Server.MapPath("~/log.txt"));
             //var req = context.Request;
             //Log.Log("reqest received");
             ////if (req.HttpMethod.ToLower() == "post" && !string.IsNullOrWhiteSpace(req.Form["payload"]) && req.QueryString["token"] == ConfigurationManager.AppSettings["token"])  {
@@ -63,16 +63,28 @@ namespace TestMVC
                 // The following commands are needed to redirect the standard output.
                 // This means that it will be redirected to the Process.StandardOutput StreamReader.
                 start.RedirectStandardOutput = true;
-                start.UseShellExecute = true;
+                start.UseShellExecute = false;
                 // Do not create the black window.
-                start.CreateNoWindow = false;
+                start.CreateNoWindow = true;
                 // Now we create a process, assign its ProcessStartInfo and start it
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo = start;
                 proc.Start();
+                var output = new List<string>();
+
+                while (proc.StandardOutput.Peek() > -1)
+                {
+                    output.Add(proc.StandardOutput.ReadLine());
+                }
+
+                while (proc.StandardError.Peek() > -1)
+                {
+                    output.Add(proc.StandardError.ReadLine());
+                }
+                proc.WaitForExit();
                // proc.WaitForExit();
                 // Get the output into a string
-                string result = proc.StandardOutput.ReadToEnd();
+                string result= "";
                 //Log.Log(result); // Display the command output.
                 //Log.Log("end deploy");
 
@@ -99,6 +111,8 @@ namespace TestMVC
                 thread.Priority = ThreadPriority.AboveNormal;
                 //Start the thread.
                 thread.Start(command);
+
+               // thread.Abort();
             }
             catch (ThreadStartException exp)
             {
