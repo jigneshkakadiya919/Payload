@@ -93,4 +93,13 @@
 [07-05-2015 13:40:17] 
 [07-05-2015 13:40:17] end deploy
 
-/////////////////////////new test//////////////////////////////////////////
+/////////////////////////new test//////////////////////////////////////////[07-05-2015 13:41:58] reqest received
+[07-05-2015 13:42:00] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
+[07-05-2015 13:42:00] begin deploy
+[07-05-2015 13:42:00] 
+[07-05-2015 13:42:00] end deploy
+[07-05-2015 13:45:59] reqest received
+[07-05-2015 13:45:59] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
+[07-05-2015 13:45:59] begin deploy
+[07-05-2015 13:45:59] 
+[07-05-2015 13:45:59] end deploy
