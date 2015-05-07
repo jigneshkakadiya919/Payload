@@ -60,11 +60,12 @@ namespace TestMVC
              listFiles = System.Diagnostics.Process.Start(psi);
              System.IO.StreamReader myOutput = listFiles.StandardOutput;
              listFiles.WaitForExit(2000);
-             if (listFiles.HasExited)
-             {
+             //if (listFiles.HasExited == true)
+             //{
                  string output = myOutput.ReadToEnd();
                  string re = output;
-             }
+           //  }
+             listFiles.Close();
          }
        
 
