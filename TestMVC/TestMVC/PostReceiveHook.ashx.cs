@@ -14,28 +14,28 @@ namespace TestMVC
     public class PostReceiveHook : IHttpHandler
     {
 
-        public Logger Log
-        {
-            get;
-            set;
-        }
+        //public Logger Log
+        //{
+        //    get;
+        //    set;
+        //}
         public void ProcessRequest(HttpContext context)
         {
-            Log = new Logger(context.Server.MapPath("~/log1.txt"));
-            var req = context.Request;
-            Log.Log("reqest received");
-            //if (req.HttpMethod.ToLower() == "post" && !string.IsNullOrWhiteSpace(req.Form["payload"]) && req.QueryString["token"] == ConfigurationManager.AppSettings["token"])  {
+            //Log = new Logger(context.Server.MapPath(""));
+            //var req = context.Request;
+            //Log.Log("reqest received");
+            ////if (req.HttpMethod.ToLower() == "post" && !string.IsNullOrWhiteSpace(req.Form["payload"]) && req.QueryString["token"] == ConfigurationManager.AppSettings["token"])  {
+            ////    Deploy();
+            ////}
+
+            //if (req.QueryString["token"] == ConfigurationManager.AppSettings["token"])
+            //{
             //    Deploy();
             //}
-
-            if (req.QueryString["token"] == ConfigurationManager.AppSettings["token"])
-            {
-                Deploy();
-            }
             Deploy();
             context.Response.ContentType = "text/plain";
             context.Response.Write("OK");
-            Log.Dispose();
+           // Log.Dispose();
         }
 
         private void Deploy()
@@ -52,8 +52,8 @@ namespace TestMVC
         {
             try
             {
-                Log.Log(command.ToString());
-                Log.Log("begin deploy");
+                //Log.Log(command.ToString());
+                //Log.Log("begin deploy");
                 // create the ProcessStartInfo using "cmd" as the program to be run,
                 // and "/c " as the parameters.
                 // Incidentally, /c tells cmd that we want it to execute the command that follows,
@@ -63,24 +63,24 @@ namespace TestMVC
                 // The following commands are needed to redirect the standard output.
                 // This means that it will be redirected to the Process.StandardOutput StreamReader.
                 start.RedirectStandardOutput = true;
-                start.UseShellExecute = false;
+                start.UseShellExecute = true;
                 // Do not create the black window.
-                start.CreateNoWindow = true;
+                start.CreateNoWindow = false;
                 // Now we create a process, assign its ProcessStartInfo and start it
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo = start;
                 proc.Start();
-                proc.WaitForExit();
+               // proc.WaitForExit();
                 // Get the output into a string
                 string result = proc.StandardOutput.ReadToEnd();
-                Log.Log(result); // Display the command output.
-                Log.Log("end deploy");
+                //Log.Log(result); // Display the command output.
+                //Log.Log("end deploy");
 
             }
             catch (Exception exp)
             {
                 // Log the exception
-                Log.LogError(exp.Message);
+               // Log.LogError(exp.Message);
             }
         }
         /// <summary>

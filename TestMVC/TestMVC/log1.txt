@@ -143,3 +143,6 @@
 ///////////////////////////test3////////////////////////////[07-05-2015 14:19:06] reqest received
 [07-05-2015 14:19:14] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
 [07-05-2015 14:19:20] begin deploy
+[07-05-2015 14:42:55] reqest received
+[07-05-2015 14:42:55] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
+[07-05-2015 14:42:55] begin deploy
