@@ -82,3 +82,15 @@
 [07-05-2015 11:26:17] begin deploy
 [07-05-2015 11:26:17] 
 [07-05-2015 11:26:17] end deploy
+[07-05-2015 11:27:04] reqest received
+[07-05-2015 11:29:44] cd C:\Users\Jignesh\test && git reset --hard HEAD && git pull
+[07-05-2015 11:29:44] begin deploy
+[07-05-2015 11:29:44] 
+[07-05-2015 11:29:44] end deploy
+[07-05-2015 13:40:17] reqest received
+[07-05-2015 13:40:17] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
+[07-05-2015 13:40:17] begin deploy
+[07-05-2015 13:40:17] 
+[07-05-2015 13:40:17] end deploy
+
+/////////////////////////new test//////////////////////////////////////////
