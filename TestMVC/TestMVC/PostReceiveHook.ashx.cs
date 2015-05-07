@@ -58,7 +58,7 @@ namespace TestMVC
                 // and "/c " as the parameters.
                 // Incidentally, /c tells cmd that we want it to execute the command that follows,
                 // and then exit.                
-                var start = new System.Diagnostics.ProcessStartInfo("cmd.exe ", "/c " + command);
+                var start = new System.Diagnostics.ProcessStartInfo("cmd.exe ", "" + command);
 
                 // The following commands are needed to redirect the standard output.
                 // This means that it will be redirected to the Process.StandardOutput StreamReader.
