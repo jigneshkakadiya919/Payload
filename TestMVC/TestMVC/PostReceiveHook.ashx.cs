@@ -52,41 +52,98 @@ namespace TestMVC
         {
             try
             {
-                //Log.Log(command.ToString());
-                //Log.Log("begin deploy");
-                // create the ProcessStartInfo using "cmd" as the program to be run,
-                // and "/c " as the parameters.
-                // Incidentally, /c tells cmd that we want it to execute the command that follows,
-                // and then exit.                
-                var start = new System.Diagnostics.ProcessStartInfo("cmd.exe ", "" + command);
 
-                // The following commands are needed to redirect the standard output.
-                // This means that it will be redirected to the Process.StandardOutput StreamReader.
-                start.RedirectStandardOutput = true;
-                start.UseShellExecute = false;
-                // Do not create the black window.
-                start.CreateNoWindow = true;
-                // Now we create a process, assign its ProcessStartInfo and start it
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = start;
-                proc.Start();
-                var output = new List<string>();
+                string strFilePath = "C:\\Users\\Jignesh\\Desktop\\Jeff\\test2.bat";
 
-                while (proc.StandardOutput.Peek() > -1)
+                // Create the ProcessInfo object
+                System.Diagnostics.ProcessStartInfo psi =
+                        new System.Diagnostics.ProcessStartInfo("cmd.exe");
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.RedirectStandardInput = true;
+                psi.RedirectStandardError = true;
+
+                // Start the process
+                System.Diagnostics.Process proc =
+                           System.Diagnostics.Process.Start(psi);
+
+                // Open the batch file for reading
+                //System.IO.StreamReader strm = 
+                //           System.IO.File.OpenText(strFilePath);
+                System.IO.StreamReader strm = proc.StandardError;
+                // Attach the output for reading
+                System.IO.StreamReader sOut = proc.StandardOutput;
+
+                // Attach the in for writing
+                System.IO.StreamWriter sIn = proc.StandardInput;
+
+                // Write each line of the batch file to standard input
+                /*while(strm.Peek() != -1)
                 {
-                    output.Add(proc.StandardOutput.ReadLine());
-                }
+                    sIn.WriteLine(strm.ReadLine());
+                }*/
+                sIn.WriteLine("");
+                strm.Close();
 
-                while (proc.StandardError.Peek() > -1)
-                {
-                    output.Add(proc.StandardError.ReadLine());
-                }
-                proc.WaitForExit();
+                // Exit CMD.EXE
+                string stEchoFmt = "# {0} run successfully. Exiting";
+
+                sIn.WriteLine(String.Format(stEchoFmt, strFilePath));
+                sIn.WriteLine("EXIT");
+
+                // Close the process
+                proc.Close();
+
+                // Read the sOut to a string.
+                string results = sOut.ReadToEnd().Trim();
+
+                // Close the io Streams;
+                sIn.Close();
+                sOut.Close();
+
+                // Write out the results.
+                //string fmtStdOut = "<font face=courier size=0>{0}</font>";
+                //this.Response.Write("<br>");
+                //this.Response.Write("<br>");
+                //this.Response.Write("<br>");
+                //this.Response.Write(String.Format(fmtStdOut,
+                //   results.Replace(System.Environment.NewLine, "<br>")));
+
+               // //Log.Log(command.ToString());
+               // //Log.Log("begin deploy");
+               // // create the ProcessStartInfo using "cmd" as the program to be run,
+               // // and "/c " as the parameters.
+               // // Incidentally, /c tells cmd that we want it to execute the command that follows,
+               // // and then exit.                
+               // var start = new System.Diagnostics.ProcessStartInfo("cmd.exe ", "" + command);
+
+               // // The following commands are needed to redirect the standard output.
+               // // This means that it will be redirected to the Process.StandardOutput StreamReader.
+               // start.RedirectStandardOutput = true;
+               // start.UseShellExecute = false;
+               // // Do not create the black window.
+               // start.CreateNoWindow = true;
+               // // Now we create a process, assign its ProcessStartInfo and start it
+               // System.Diagnostics.Process proc = new System.Diagnostics.Process();
+               // proc.StartInfo = start;
+               // proc.Start();
+               // var output = new List<string>();
+
+               // while (proc.StandardOutput.Peek() > -1)
+               // {
+               //     output.Add(proc.StandardOutput.ReadLine());
+               // }
+
+               // while (proc.StandardError.Peek() > -1)
+               // {
+               //     output.Add(proc.StandardError.ReadLine());
+               // }
                // proc.WaitForExit();
-                // Get the output into a string
-                string result= "";
-                //Log.Log(result); // Display the command output.
-                //Log.Log("end deploy");
+               //// proc.WaitForExit();
+               // // Get the output into a string
+               // string result= "";
+               // //Log.Log(result); // Display the command output.
+               // //Log.Log("end deploy");
 
             }
             catch (Exception exp)

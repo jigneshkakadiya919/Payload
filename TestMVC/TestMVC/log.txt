@@ -1,0 +1,3 @@
+﻿[07-May-15 3:26:37 PM] reqest received
+[07-May-15 3:26:38 PM] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
+[07-May-15 3:26:38 PM] begin deploy
