@@ -151,3 +151,6 @@ testtststst
 [07-05-2015 15:20:56] reqest received
 [07-05-2015 15:20:56] cd C:\Users\Jignesh\test\payload && git reset --hard HEAD && git pull
 [07-05-2015 15:20:56] begin deploy
+
+
+test 2
