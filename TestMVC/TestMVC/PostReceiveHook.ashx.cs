@@ -51,23 +51,30 @@ namespace TestMVC
         /// 
         public void ExecuteCommandSync(object command)
         {
-            System.Diagnostics.ProcessStartInfo psi =
- new System.Diagnostics.ProcessStartInfo(@"C:\Users\Jignesh\Desktop\Jeff\test2.bat");           
+            //command = "E:" + Environment.NewLine +
+            //          "cd E:\\Jignesh\\Project\\Payload\\Payload\\Payload" + Environment.NewLine +
+            //          "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild" + "" + "E:\\Jignesh\\Project\\Payload\\Payload\\Payload\\TestMVC\\TestMVC\\TestMVC.csproj /p:DeployOnBuild=true;PublishProfile=test " + Environment.NewLine;
+
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"C:\Users\Jignesh\Desktop\Jeff\test_deploy.bat");  
+ 
+                // new System.Diagnostics.ProcessStartInfo("cmd.exe ", "" + command);  
+           
             psi.RedirectStandardOutput = true;
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             psi.UseShellExecute = false;
-            System.Diagnostics.Process listFiles;
+            System.Diagnostics.Process listFiles;            
             listFiles = System.Diagnostics.Process.Start(psi);
+            listFiles.PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
             System.IO.StreamReader myOutput = listFiles.StandardOutput;
-            listFiles.WaitForExit();
+            listFiles.WaitForExit(120000);
             
-            if (listFiles.HasExited == true)
-            {
+            //if (listFiles.HasExited == true)
+            //{
                 string output = myOutput.ReadToEnd();
                 string re = output;
               //  listFiles.Kill();
                 
-            }
+            //}
 
         }
 
@@ -96,7 +103,7 @@ namespace TestMVC
         //        System.Diagnostics.Process proc = new System.Diagnostics.Process();
         //        proc.StartInfo = start;
         //        proc.Start();
-        //        proc.WaitForExit(5000);
+        //        proc.WaitForExit();
         //        //var output = new List<string>();
 
         //        //while (proc.StandardOutput.Peek() > -1)
@@ -108,7 +115,7 @@ namespace TestMVC
         //        //{
         //        //    output.Add(proc.StandardError.ReadLine());
         //        //}
-              
+
         //        // proc.WaitForExit();
         //        // Get the output into a string
         //        string result = proc.StandardOutput.ReadToEnd();
@@ -135,11 +142,11 @@ namespace TestMVC
                 //Make the thread as background thread.
                 thread.IsBackground = true;
                 //Set the Priority of the thread.
-                thread.Priority = ThreadPriority.AboveNormal;
+                thread.Priority = ThreadPriority.Highest;
                 //Start the thread.
                 thread.Start(command);
 
-               // thread.Abort();
+                // thread.Abort();
             }
             catch (ThreadStartException exp)
             {
